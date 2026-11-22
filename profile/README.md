@@ -1,15 +1,5 @@
-<div align="center">
+<img src="banner.jpg" alt="Neurohogar: calm, evidence-based tools for neurodivergent households. ADHD, autism, high abilities, zero guilt." width="100%">
 
-<img src="logo.jpg" alt="" width="96" height="96">
-
-### Neurohogar
-
-**Calm, evidence-based tools for neurodivergent households.**<br>
-ADHD · autism · high abilities · zero guilt
-
-</div>
-
----
 
 Most productivity tools are built for brains that already find it easy to start. Neurohogar builds for the others: people who forget, freeze or get overwhelmed, and the homes they share. The tools are free, open source and designed from published research, not from hunches.
 

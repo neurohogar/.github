@@ -1,7 +1,12 @@
 import bpy, math, sys
 from mathutils import Vector
 out = sys.argv[sys.argv.index('--')+1]
-samples = int(sys.argv[sys.argv.index('--')+2])
+args = sys.argv[sys.argv.index('--')+1:]
+samples = int(args[1])
+# optional: width height shift_x lens (banner framing)
+width, height = (int(args[2]), int(args[3])) if len(args) > 3 else (1024, 1024)
+shift_x = float(args[4]) if len(args) > 4 else 0.0
+lens = float(args[5]) if len(args) > 5 else 88.0
 bpy.ops.wm.read_factory_settings(use_empty=True)
 sc = bpy.context.scene
 sc.render.engine = 'CYCLES'
@@ -15,7 +20,7 @@ for d in prefs.devices: d.use = d.type != 'CPU'
 sc.cycles.device = 'GPU'
 sc.cycles.samples = samples
 sc.cycles.use_denoising = True
-sc.render.resolution_x = sc.render.resolution_y = 1024
+sc.render.resolution_x, sc.render.resolution_y = width, height
 sc.view_settings.view_transform = 'AgX'
 sc.view_settings.look = 'AgX - Medium High Contrast'
 sc.view_settings.exposure = -0.75
@@ -106,7 +111,7 @@ w = bpy.data.worlds.new('w'); sc.world = w; w.use_nodes = True
 w.node_tree.nodes['Background'].inputs['Color'].default_value = hexrgb('#24493a'); w.node_tree.nodes['Background'].inputs['Strength'].default_value = .6
 
 bpy.ops.object.camera_add(location=(0, -11.5, 3.1))
-cam = bpy.context.object; sc.camera = cam; cam.data.lens = 88
+cam = bpy.context.object; sc.camera = cam; cam.data.lens = lens; cam.data.sensor_fit = 'VERTICAL'; cam.data.shift_x = shift_x
 cam.rotation_euler = (Vector((0, 0, 1.25)) - cam.location).to_track_quat('-Z', 'Y').to_euler()
 sc.render.filepath = out
 bpy.ops.render.render(write_still=True)

@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="logo.svg" alt="" width="88" height="88">
+<img src="logo.jpg" alt="" width="96" height="96">
 
 ### Neurohogar
 
